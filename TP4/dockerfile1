@@ -1,32 +1,14 @@
-# Utiliser Debian 11 comme image de base
 FROM debian:11
 
-# Mettre à jour les paquets et installer les dépendances système
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y \
-        build-essential \
-        pkg-config \
-        python-dev \
-        python3-pip \
-        default-libmysqlclient-dev
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y build-essential pkg-config python3-dev python3-pip default-libmysqlclient-dev
 
-# Mettre à jour pip
 RUN pip3 install --upgrade pip
+RUN pip3 install flask-mysqldb mysql-connector-python
 
-# Installer les paquets Python nécessaires
-RUN pip3 install \
-    flask-mysqldb \
-    mysql-connector-python
-
-# Créer le dossier pour les templates
 RUN mkdir -p /srv/templates
-
-# Copier les fichiers nécessaires dans le conteneur
-# (Assurez-vous que 'app_1.py' et 'index.html' sont dans le même dossier que le Dockerfile)
-COPY app_1.py /srv/
 COPY index.html /srv/templates/
+COPY app_1.py /srv/
 
-# Définir la commande de lancement de l'application Flask
 CMD ["flask", "--app", "/srv/app_1", "run", "--host=0.0.0.0"]
 
