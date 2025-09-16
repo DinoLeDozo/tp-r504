@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Construire l'image Docker avec le Dockerfile nommé Dockerfile1
-docker build -f Dockerfile1 -t im-tp4 .
+docker build -f Dockerfile2 -t im-tp4 .
 
 # Afficher la taille de l'image Debian 11 (de base)
 echo "Taille de l'image de base debian:11 :"
