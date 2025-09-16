@@ -1,16 +1,9 @@
-CREATE DATABASE IF NOT EXISTS demosql;
-USE demosql;
+CREATE DATABASE IF NOT EXISTS TP4;
+USE TP4;
 
-DROP TABLE IF EXISTS myTable;
-
-CREATE TABLE myTable (
-    id INT AUTO_INCREMENT,
-    name VARCHAR(45) NOT NULL,
-    PRIMARY KEY (id)
+CREATE TABLE IF NOT EXISTS myTable (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100)
 );
 
-INSERT INTO myTable (name) VALUES
-('bob'),
-('alice'),
-('john');
-
+INSERT INTO myTable (name) VALUES ('Alice'), ('Bob'), ('Charlie');
