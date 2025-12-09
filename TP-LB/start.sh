@@ -1,0 +1,27 @@
+docker network create tplb
+docker build -t im-nginx-lb tp-A/
+mkdir -p shared1
+mkdir -p shared2
+echo "<h1>Hello 1</h1>" > shared1/index.html
+echo "<h2>Hello 2</h2>" > shared2/index.html
+docker run -d --rm \
+  --name nginx1 \
+  --network tplb \
+  -p 81:80 \
+  -v $(pwd)/shared1:/usr/share/nginx/html \
+  nginx:latest
+
+docker run -d --rm \
+  --name nginx2 \
+  --network tplb \
+  -p 82:80 \
+  -v $(pwd)/shared2:/usr/share/nginx/html \
+  nginx:latest
+
+docker run -d --rm \
+  --name nginx-lb \
+  --network tplb \
+  -p 83:80 \
+  im-nginx-lb
+
+echo "les conteneurs sont prêts"
